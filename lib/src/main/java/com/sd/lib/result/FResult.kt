@@ -2,7 +2,7 @@ package com.sd.lib.result
 
 import com.sd.lib.result.exception.FException
 
-class FResult<T> internal constructor(val data: T?, val failure: FFailure?) {
+class FResult<T> internal constructor(val data: T?, val failure: Exception?) {
     val isSuccess: Boolean
     val isFailure: Boolean
 
@@ -38,38 +38,18 @@ class FResult<T> internal constructor(val data: T?, val failure: FFailure?) {
 
         @JvmStatic
         fun <T> failure(message: String? = ""): FResult<T> {
-            val exception = FException(message = message)
-            return failure(exception)
+            return failure(FException(message = message))
         }
 
         @JvmStatic
         fun <T> failure(result: FResult<*>): FResult<T> {
             assert(result.isFailure)
-            val exception = result.failure!!.exception
-            return failure(exception)
+            return failure(result.failure!!)
         }
 
         @JvmStatic
         fun <T> failure(exception: Exception?): FResult<T> {
-            return FResult(null, FFailure(exception ?: FException(message = "unknown")))
+            return FResult(null, exception ?: FException(message = "unknown"))
         }
-    }
-}
-
-class FFailure(
-    val exception: Exception,
-) {
-    override fun hashCode(): Int {
-        return exception.hashCode()
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (other === this) return true
-        if (other !is FFailure) return false
-        return exception == other.exception
-    }
-
-    override fun toString(): String {
-        return exception.toString()
     }
 }
