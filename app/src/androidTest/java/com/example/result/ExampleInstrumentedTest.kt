@@ -27,7 +27,7 @@ class ExampleInstrumentedTest {
         assertEquals(true, result.isSuccess)
         assertEquals(false, result.isFailure)
         assertEquals("success", result.data)
-        assertEquals(null, result.failure)
+        assertEquals(null, result.exception)
     }
 
     @Test
@@ -36,10 +36,10 @@ class ExampleInstrumentedTest {
         assertEquals(true, result.isFailure)
         assertEquals(false, result.isSuccess)
         assertEquals(null, result.data)
-        assertEquals("failure", result.failure!!.toString())
+        assertEquals("failure", result.exception!!.toString())
 
         val resultCopy = FResult.failure<String>(result)
-        assertEquals(result.failure, resultCopy.failure)
+        assertEquals(result.exception, resultCopy.exception)
         assertEquals(result, resultCopy)
     }
 

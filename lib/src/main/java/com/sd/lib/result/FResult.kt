@@ -2,13 +2,13 @@ package com.sd.lib.result
 
 import com.sd.lib.result.exception.FException
 
-class FResult<T> internal constructor(val data: T?, val failure: Exception?) {
+class FResult<T> internal constructor(val data: T?, val exception: Exception?) {
     val isSuccess: Boolean
     val isFailure: Boolean
 
     init {
-        val success = data != null && failure == null
-        val failure = data == null && failure != null
+        val success = data != null && exception == null
+        val failure = data == null && exception != null
 
         assert(success || failure)
         if (success && failure) throw RuntimeException("success and failure")
@@ -18,7 +18,7 @@ class FResult<T> internal constructor(val data: T?, val failure: Exception?) {
     }
 
     override fun hashCode(): Int {
-        return arrayOf(isSuccess, isFailure, data, failure).contentHashCode()
+        return arrayOf(isSuccess, isFailure, data, exception).contentHashCode()
     }
 
     override fun equals(other: Any?): Boolean {
@@ -27,7 +27,7 @@ class FResult<T> internal constructor(val data: T?, val failure: Exception?) {
         return isSuccess == other.isSuccess &&
                 isFailure == other.isFailure &&
                 data == other.data &&
-                failure == other.failure
+                exception == other.exception
     }
 
     companion object {
@@ -44,7 +44,7 @@ class FResult<T> internal constructor(val data: T?, val failure: Exception?) {
         @JvmStatic
         fun <T> failure(result: FResult<*>): FResult<T> {
             assert(result.isFailure)
-            return failure(result.failure!!)
+            return failure(result.exception!!)
         }
 
         @JvmStatic
