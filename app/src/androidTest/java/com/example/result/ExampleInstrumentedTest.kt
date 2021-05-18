@@ -24,56 +24,20 @@ class ExampleInstrumentedTest {
     @Test
     fun testResultSuccess() {
         val result = FResult.success("success")
-        assertEquals(true, result.isSuccess)
-        assertEquals(false, result.isFailure)
         assertEquals("success", result.data)
-        assertEquals(null, result.exception)
     }
 
     @Test
     fun testResultFailure() {
-        val result = FResult.failure<String>("failure")
-        assertEquals(true, result.isFailure)
-        assertEquals(false, result.isSuccess)
-        assertEquals(null, result.data)
-        assertEquals("failure", result.exception!!.toString())
-
-        val resultCopy = FResult.failure<String>(result)
-        assertEquals(result.exception, resultCopy.exception)
-        assertEquals(result, resultCopy)
+        val result = FResult.failure("failure")
+        assertEquals("failure", result.exception.toString())
     }
 
     @Test
     fun testResultEquals() {
-        val resultSuccess = FResult.success("success")
-        val resultFailure = FResult.failure<String>("failure")
-        assertEquals(false, resultSuccess == resultFailure)
-        assertEquals(true, resultSuccess == FResult.success("success"))
-        assertEquals(false, resultFailure == FResult.failure<String>("failure"))
-    }
-
-    @Test
-    fun testResultSet() {
-        val set = mutableSetOf<FResult<*>>()
-
-        val resultSuccess = FResult.success("success")
-        val resultFailure = FResult.failure<String>("failure")
-
-        set.clear()
-        set.add(resultSuccess)
-        set.add(resultFailure)
-        assertEquals(2, set.size)
-        assertEquals(true, set.contains(FResult.success("success")))
-
-        val add = set.add(FResult.success("success"))
-        assertEquals(false, add)
-        assertEquals(2, set.size)
-
-        val failure = FResult.failure<String>("failure")
-        assertEquals(false, set.contains(failure))
-
-        set.add(failure)
-        assertEquals(true, set.contains(failure))
-        assertEquals(3, set.size)
+        val success = FResult.success("success")
+        val failure = FResult.failure("failure")
+        assertEquals(true, success == FResult.success("success"))
+        assertEquals(false, failure == FResult.failure("failure"))
     }
 }
