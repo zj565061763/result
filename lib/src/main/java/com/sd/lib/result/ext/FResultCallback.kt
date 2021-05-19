@@ -4,4 +4,8 @@ import com.sd.lib.result.FResult
 
 interface FResultCallback<T> {
     fun onResult(result: FResult<T>)
+
+    interface Cancelable {
+        fun cancel()
+    }
 }
