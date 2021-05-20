@@ -23,25 +23,22 @@ class ExampleInstrumentedTest {
 
     @Test
     fun testResultSuccess() {
-        val result = FResult.success("success")
-        assertEquals("success", result.data)
+        assertEquals("success", FResult.success("success").data)
+
+        val result = getResult(100)
+        assertEquals(false, result is FResult.Failure)
+        assertEquals(true, result is FResult.Success<Int>)
+        assertEquals(100, (result as FResult.Success<Int>).data)
     }
 
     @Test
     fun testResultFailure() {
-        val result = FResult.failure("failure")
-        assertEquals("failure", result.exception.toString())
-    }
+        assertEquals("failure", FResult.failure("failure").exception.toString())
 
-    @Test
-    fun testResult() {
-        val success = getResult(100)
-        assertEquals(true, success is FResult.Success<Int>)
-        assertEquals(100, (success as FResult.Success<Int>).data)
-
-        val failure = getResult(0)
-        assertEquals(true, failure is FResult.Failure)
-        assertEquals("error", (failure as FResult.Failure).exception.toString())
+        val result = getResult(0)
+        assertEquals(false, result is FResult.Success<Int>)
+        assertEquals(true, result is FResult.Failure)
+        assertEquals("error", (result as FResult.Failure).exception.toString())
     }
 
     @Test
