@@ -1,7 +1,9 @@
 package com.sd.lib.result.ext
 
+import com.sd.lib.result.FResult
+
 interface FResultCallback<T> {
-    fun onResult(result: Result<T>)
+    fun onResult(result: FResult<T>)
 
     fun interface Cancelable {
         fun cancel()
