@@ -14,7 +14,7 @@ sealed class FResult<out R> {
         }
 
         @JvmStatic
-        fun failure(message: String? = ""): Failure {
+        fun failure(message: String?): Failure {
             return Failure(FException(message = message))
         }
 
