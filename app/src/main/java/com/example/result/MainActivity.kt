@@ -15,11 +15,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         getResult(100).runSuccess {
-            Log.i(TAG, "runSuccess:${it}")
+            Log.i(TAG, "100 runSuccess:${it}")
+        }
+        getResult(100).runFailure {
+            Log.i(TAG, "100 runFailure:${it}")
         }
 
+        getResult(0).runSuccess {
+            Log.i(TAG, "0 runSuccess:${it}")
+        }
         getResult(0).runFailure {
-            Log.i(TAG, "runFailure:${it}")
+            Log.i(TAG, "0 runFailure:${it}")
         }
     }
 
