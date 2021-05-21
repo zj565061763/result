@@ -3,6 +3,8 @@ package com.example.result
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.sd.lib.result.FResult
+import com.sd.lib.result.runFailure
+import com.sd.lib.result.runSuccess
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,10 +40,12 @@ class ExampleInstrumentedTest {
         val success = getResult(100)
         assertEquals(true, success is FResult.Success<Int>)
         assertEquals(100, (success as FResult.Success<Int>).data)
+        assertEquals(100, success.runSuccess { assertEquals(100, it) })
 
         val failure = getResult(0)
         assertEquals(true, failure is FResult.Failure)
         assertEquals("error", (failure as FResult.Failure).exception.toString())
+        assertEquals("error", failure.runFailure { assertEquals("error", it.toString()) }.toString())
     }
 
     @Test
