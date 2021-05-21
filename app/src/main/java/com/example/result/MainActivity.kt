@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.sd.lib.result.FResult
-import com.sd.lib.result.runFailure
-import com.sd.lib.result.runSuccess
+import com.sd.lib.result.onFailure
+import com.sd.lib.result.onSuccess
 
 class MainActivity : AppCompatActivity() {
     val TAG = MainActivity::class.java.simpleName
@@ -14,18 +14,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        getResult(100).runSuccess {
-            Log.i(TAG, "100 runSuccess:${it}")
+        getResult(100).onSuccess {
+            Log.i(TAG, "100 onSuccess:${it}")
         }
-        getResult(100).runFailure {
-            Log.i(TAG, "100 runFailure:${it}")
+        getResult(100).onFailure {
+            Log.i(TAG, "100 onFailure:${it}")
         }
 
-        getResult(0).runSuccess {
-            Log.i(TAG, "0 runSuccess:${it}")
+        getResult(0).onSuccess {
+            Log.i(TAG, "0 onSuccess:${it}")
         }
-        getResult(0).runFailure {
-            Log.i(TAG, "0 runFailure:${it}")
+        getResult(0).onFailure {
+            Log.i(TAG, "0 onFailure:${it}")
         }
     }
 

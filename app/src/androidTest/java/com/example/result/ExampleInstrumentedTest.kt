@@ -3,8 +3,8 @@ package com.example.result
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.sd.lib.result.FResult
-import com.sd.lib.result.runFailure
-import com.sd.lib.result.runSuccess
+import com.sd.lib.result.onFailure
+import com.sd.lib.result.onSuccess
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,7 +33,7 @@ class ExampleInstrumentedTest {
         assertEquals(100, (result as FResult.Success<Int>).data)
 
         var count = 1
-        result.runSuccess {
+        result.onSuccess {
             assertEquals(100, it)
             count += it
         }
@@ -50,7 +50,7 @@ class ExampleInstrumentedTest {
         assertEquals("error", (result as FResult.Failure).exception.toString())
 
         var content = "error"
-        result.runFailure {
+        result.onFailure {
             assertEquals("error", it.toString())
             content += content
         }
