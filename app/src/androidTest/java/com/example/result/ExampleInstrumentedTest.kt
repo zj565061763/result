@@ -31,7 +31,13 @@ class ExampleInstrumentedTest {
         assertEquals(false, result is FResult.Failure)
         assertEquals(true, result is FResult.Success<Int>)
         assertEquals(100, (result as FResult.Success<Int>).data)
-        assertEquals(100, result.runSuccess { assertEquals(100, it) })
+
+        var count = 1
+        result.runSuccess {
+            assertEquals(100, it)
+            count += it
+        }
+        assertEquals(101, count)
     }
 
     @Test
@@ -42,7 +48,13 @@ class ExampleInstrumentedTest {
         assertEquals(false, result is FResult.Success<Int>)
         assertEquals(true, result is FResult.Failure)
         assertEquals("error", (result as FResult.Failure).exception.toString())
-        assertEquals("error", result.runFailure { assertEquals("error", it.toString()) }.toString())
+
+        var content = "error"
+        result.runFailure {
+            assertEquals("error", it.toString())
+            content += content
+        }
+        assertEquals("errorerror", content)
     }
 
     @Test

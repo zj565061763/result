@@ -25,20 +25,14 @@ sealed class FResult<out R> {
     }
 }
 
-inline fun <T> FResult<T>.runSuccess(block: (T) -> Unit): T? {
-    return if (this is FResult.Success<T>) {
+inline fun <T> FResult<T>.runSuccess(block: (T) -> Unit) {
+    if (this is FResult.Success<T>) {
         block(data)
-        data
-    } else {
-        null
     }
 }
 
-inline fun FResult<*>.runFailure(block: (Exception) -> Unit): Exception? {
-    return if (this is FResult.Failure) {
+inline fun FResult<*>.runFailure(block: (Exception) -> Unit) {
+    if (this is FResult.Failure) {
         block(exception)
-        exception
-    } else {
-        null
     }
 }
