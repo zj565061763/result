@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.sd.lib.result.FResult
-import com.sd.lib.result.onFailure
-import com.sd.lib.result.onSuccess
 
 class MainActivity : AppCompatActivity() {
     val TAG = MainActivity::class.java.simpleName
