@@ -1,4 +1,4 @@
-package com.example.result
+package com.sd.demo.result
 
 import android.os.Bundle
 import android.util.Log

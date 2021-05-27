@@ -1,4 +1,4 @@
-package com.example.result
+package com.sd.demo.result
 
 import org.junit.Test
 
