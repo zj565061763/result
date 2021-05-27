@@ -4,13 +4,13 @@ import com.sd.lib.result.exception.FException
 
 sealed class FResult<out R> {
 
-    fun onSuccess(block: (R) -> Unit) {
+    inline fun onSuccess(block: (R) -> Unit) {
         if (this is Success<R>) {
             block(data)
         }
     }
 
-    fun onFailure(block: (Exception) -> Unit) {
+    inline fun onFailure(block: (Exception) -> Unit) {
         if (this is Failure) {
             block(exception)
         }
