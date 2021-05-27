@@ -3,8 +3,6 @@ package com.example.result
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.sd.lib.result.FResult
-import com.sd.lib.result.onFailure
-import com.sd.lib.result.onSuccess
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith

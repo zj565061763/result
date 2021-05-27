@@ -4,6 +4,18 @@ import com.sd.lib.result.exception.FException
 
 sealed class FResult<out R> {
 
+    fun onSuccess(block: (R) -> Unit) {
+        if (this is Success<R>) {
+            block(data)
+        }
+    }
+
+    fun onFailure(block: (Exception) -> Unit) {
+        if (this is Failure) {
+            block(exception)
+        }
+    }
+
     data class Success<out T> internal constructor(val data: T) : FResult<T>()
 
     data class Failure internal constructor(val exception: Exception) : FResult<Nothing>()
@@ -26,12 +38,14 @@ sealed class FResult<out R> {
     }
 }
 
+@Deprecated("")
 inline fun <T> FResult<T>.onSuccess(block: (T) -> Unit) {
     if (this is FResult.Success<T>) {
         block(data)
     }
 }
 
+@Deprecated("")
 inline fun FResult<*>.onFailure(block: (Exception) -> Unit) {
     if (this is FResult.Failure) {
         block(exception)
