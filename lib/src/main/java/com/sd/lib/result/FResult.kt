@@ -37,17 +37,3 @@ sealed class FResult<out R> {
         }
     }
 }
-
-@Deprecated("")
-inline fun <T> FResult<T>.onSuccess(block: (T) -> Unit) {
-    if (this is FResult.Success<T>) {
-        block(data)
-    }
-}
-
-@Deprecated("")
-inline fun FResult<*>.onFailure(block: (Exception) -> Unit) {
-    if (this is FResult.Failure) {
-        block(exception)
-    }
-}
