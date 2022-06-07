@@ -52,19 +52,19 @@ sealed class FResult<out R> {
 }
 
 @OptIn(ExperimentalContracts::class)
-fun FResult<*>.isSuccess(): Boolean {
+fun <T> FResult<T>.isSuccess(): Boolean {
     contract {
-        returns(true) implies (this@isSuccess is FResult.Success)
+        returns(true) implies (this@isSuccess is FResult.Success<T>)
         returns(false) implies (this@isSuccess is FResult.Failure)
     }
-    return this is FResult.Success
+    return this is FResult.Success<T>
 }
 
 @OptIn(ExperimentalContracts::class)
-fun FResult<*>.isFailure(): Boolean {
+fun <T> FResult<T>.isFailure(): Boolean {
     contract {
         returns(true) implies (this@isFailure is FResult.Failure)
-        returns(false) implies (this@isFailure is FResult.Success)
+        returns(false) implies (this@isFailure is FResult.Success<T>)
     }
     return this is FResult.Failure
 }
