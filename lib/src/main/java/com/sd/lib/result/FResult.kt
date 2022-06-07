@@ -1,6 +1,7 @@
 package com.sd.lib.result
 
 import com.sd.lib.result.exception.FException
+import com.sd.lib.result.exception.FExceptionLoading
 
 sealed class FResult<out R> {
 
@@ -34,6 +35,11 @@ sealed class FResult<out R> {
         @JvmStatic
         fun failure(exception: Exception?): Failure {
             return Failure(exception ?: FException(message = "unknown"))
+        }
+
+        @JvmStatic
+        fun loading(msg: String? = ""): Failure {
+            return Failure(FExceptionLoading(msg))
         }
     }
 }

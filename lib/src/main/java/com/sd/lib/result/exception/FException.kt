@@ -10,3 +10,11 @@ open class FException : Exception {
         return superMessage + causeMessage
     }
 }
+
+fun Exception.isLoading(): Boolean {
+    return this is FExceptionLoading
+}
+
+fun Exception.isCancellation(): Boolean {
+    return this is FExceptionCancellation
+}
