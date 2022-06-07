@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         getResult(0).onFailure {
             Log.i(TAG, "0 onFailure:${it}")
         }
+
+        val loading = FResult.loading("")
+        Log.i(TAG, "isLoading:${loading.isLoading()}")
     }
 
     companion object {

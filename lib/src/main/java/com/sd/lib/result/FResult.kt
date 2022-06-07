@@ -2,6 +2,7 @@ package com.sd.lib.result
 
 import com.sd.lib.result.exception.FException
 import com.sd.lib.result.exception.FExceptionLoading
+import com.sd.lib.result.exception.isLoading
 
 sealed class FResult<out R> {
 
@@ -15,6 +16,10 @@ sealed class FResult<out R> {
         if (this is Failure) {
             block(exception)
         }
+    }
+
+    fun isLoading(): Boolean {
+        return this is Failure && this.exception.isLoading()
     }
 
     data class Success<out T> internal constructor(val data: T) : FResult<T>()

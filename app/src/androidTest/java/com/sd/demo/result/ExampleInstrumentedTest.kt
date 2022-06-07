@@ -2,6 +2,8 @@ package com.sd.demo.result
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.sd.lib.result.FResult
+import com.sd.lib.result.exception.FExceptionLoading
+import com.sd.lib.result.exception.isLoading
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -53,6 +55,15 @@ class ExampleInstrumentedTest {
         val failure = FResult.failure("failure")
         assertEquals(true, success == FResult.success("success"))
         assertEquals(false, failure == FResult.failure("failure"))
+    }
+
+    @Test
+    fun testLoading() {
+        val exception = FExceptionLoading()
+        assertEquals(true, exception.isLoading())
+
+        val loadingResult = FResult.loading("")
+        assertEquals(true, loadingResult.isLoading())
     }
 
     companion object {
