@@ -55,6 +55,7 @@ sealed class FResult<out R> {
 fun FResult<*>.isSuccess(): Boolean {
     contract {
         returns(true) implies (this@isSuccess is FResult.Success)
+        returns(false) implies (this@isSuccess is FResult.Failure)
     }
     return this is FResult.Success
 }
@@ -63,6 +64,7 @@ fun FResult<*>.isSuccess(): Boolean {
 fun FResult<*>.isFailure(): Boolean {
     contract {
         returns(true) implies (this@isFailure is FResult.Failure)
+        returns(false) implies (this@isFailure is FResult.Success)
     }
     return this is FResult.Failure
 }

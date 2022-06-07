@@ -31,14 +31,18 @@ class MainActivity : AppCompatActivity() {
         val loadingResult = FResult.loading("")
         Log.i(TAG, "isLoading:${loadingResult.isLoading()}")
 
-        val successResult = getResult(100)
-        if (successResult.isSuccess()) {
-            Log.i(TAG, "isSuccess:${successResult.data}")
+        val result100 = getResult(100)
+        if (result100.isSuccess()) {
+            Log.i(TAG, "isSuccess:${result100.data}")
+        } else {
+            Log.i(TAG, "isFailure:${result100.exception}")
         }
 
-        val failureResult = getResult(0)
-        if (failureResult.isFailure()) {
-            Log.i(TAG, "isFailure:${failureResult.exception}")
+        val result0 = getResult(0)
+        if (result0.isFailure()) {
+            Log.i(TAG, "isFailure:${result0.exception}")
+        } else {
+            Log.i(TAG, "isSuccess:${result0.data}")
         }
     }
 
