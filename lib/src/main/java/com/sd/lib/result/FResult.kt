@@ -3,6 +3,8 @@ package com.sd.lib.result
 import com.sd.lib.result.exception.FException
 import com.sd.lib.result.exception.FExceptionLoading
 import com.sd.lib.result.exception.isLoading
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
 
 sealed class FResult<out R> {
 
@@ -47,4 +49,20 @@ sealed class FResult<out R> {
             return Failure(FExceptionLoading(msg))
         }
     }
+}
+
+@OptIn(ExperimentalContracts::class)
+fun FResult<*>.isSuccess(): Boolean {
+    contract {
+        returns(true) implies (this@isSuccess is FResult.Success)
+    }
+    return this is FResult.Success
+}
+
+@OptIn(ExperimentalContracts::class)
+fun FResult<*>.isFailure(): Boolean {
+    contract {
+        returns(true) implies (this@isFailure is FResult.Failure)
+    }
+    return this is FResult.Failure
 }

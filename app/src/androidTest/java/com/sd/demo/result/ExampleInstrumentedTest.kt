@@ -2,8 +2,9 @@ package com.sd.demo.result
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.sd.lib.result.FResult
-import com.sd.lib.result.exception.FExceptionLoading
-import com.sd.lib.result.exception.isLoading
+import com.sd.lib.result.exception.*
+import com.sd.lib.result.isFailure
+import com.sd.lib.result.isSuccess
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,19 +52,32 @@ class ExampleInstrumentedTest {
 
     @Test
     fun testResultEquals() {
-        val success = FResult.success("success")
-        val failure = FResult.failure("failure")
-        assertEquals(true, success == FResult.success("success"))
-        assertEquals(false, failure == FResult.failure("failure"))
+        assertEquals(true, FResult.success("success") == FResult.success("success"))
+        assertEquals(false, FResult.failure("failure") == FResult.failure("failure"))
     }
 
     @Test
-    fun testLoading() {
-        val exception = FExceptionLoading()
-        assertEquals(true, exception.isLoading())
+    fun testExceptionLoading() {
+        assertEquals(true, FExceptionLoading().isLoading())
+        assertEquals(false, FException().isLoading())
+    }
 
-        val loadingResult = FResult.loading("")
-        assertEquals(true, loadingResult.isLoading())
+    @Test
+    fun testExceptionCancellation() {
+        assertEquals(true, FExceptionCancellation().isCancellation())
+        assertEquals(false, FException().isLoading())
+    }
+
+    @Test
+    fun testIsSuccess() {
+        assertEquals(true, getResult(100).isSuccess())
+        assertEquals(false, getResult(0).isSuccess())
+    }
+
+    @Test
+    fun testIsFailure() {
+        assertEquals(true, getResult(0).isFailure())
+        assertEquals(false, getResult(100).isFailure())
     }
 
     companion object {

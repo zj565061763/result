@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.sd.lib.result.FResult
+import com.sd.lib.result.isFailure
+import com.sd.lib.result.isSuccess
 
 class MainActivity : AppCompatActivity() {
     val TAG = MainActivity::class.java.simpleName
@@ -26,8 +28,18 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG, "0 onFailure:${it}")
         }
 
-        val loading = FResult.loading("")
-        Log.i(TAG, "isLoading:${loading.isLoading()}")
+        val loadingResult = FResult.loading("")
+        Log.i(TAG, "isLoading:${loadingResult.isLoading()}")
+
+        val successResult = getResult(100)
+        if (successResult.isSuccess()) {
+            Log.i(TAG, "isSuccess:${successResult.data}")
+        }
+
+        val failureResult = getResult(0)
+        if (failureResult.isFailure()) {
+            Log.i(TAG, "isFailure:${failureResult.exception}")
+        }
     }
 
     companion object {
