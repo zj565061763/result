@@ -3,13 +3,11 @@ package com.sd.lib.result.exception
 /**
  * 状态码异常
  */
-open class FExceptionCode : FException {
-    val code: Int
-
-    @JvmOverloads
-    constructor(code: Int, message: String? = "", cause: Throwable? = null) : super(message, cause) {
-        this.code = code
-    }
+open class FExceptionCode @JvmOverloads constructor(
+    val code: Int,
+    message: String? = "",
+    cause: Throwable? = null,
+) : FException(message, cause) {
 
     override fun toString(): String {
         return "${super.toString()} code:${code}"

@@ -1,8 +1,9 @@
 package com.sd.lib.result.exception
 
-open class FException : Exception {
-    @JvmOverloads
-    constructor(message: String? = "", cause: Throwable? = null) : super(message, cause)
+open class FException @JvmOverloads constructor(
+    message: String? = "",
+    cause: Throwable? = null,
+) : Exception(message, cause) {
 
     override fun toString(): String {
         val superMessage = localizedMessage ?: ""
