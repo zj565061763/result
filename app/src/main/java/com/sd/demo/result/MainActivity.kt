@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.sd.lib.result.FResult
 import com.sd.lib.result.isFailure
 import com.sd.lib.result.isSuccess
+import com.sd.lib.result.toFResult
 
 class MainActivity : AppCompatActivity() {
     val TAG = MainActivity::class.java.simpleName
@@ -43,6 +44,18 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG, "isFailure:${result0.exception}")
         } else {
             Log.i(TAG, "isSuccess:${result0.data}")
+        }
+
+        runCatching {
+            "success"
+        }.toFResult().onSuccess {
+            Log.i(TAG, "toFResult onSuccess:${it}")
+        }
+
+        runCatching {
+            throw RuntimeException("error")
+        }.toFResult().onFailure {
+            Log.i(TAG, "toFResult onFailure:${it}")
         }
     }
 

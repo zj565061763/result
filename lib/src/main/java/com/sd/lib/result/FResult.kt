@@ -68,3 +68,11 @@ fun <T> FResult<T>.isFailure(): Boolean {
     }
     return this is FResult.Failure
 }
+
+fun <T> Result<T>.toFResult(): FResult<T> {
+    return if (isSuccess) {
+        FResult.success(getOrNull()!!)
+    } else {
+        FResult.failure(FException(cause = exceptionOrNull()!!))
+    }
+}
