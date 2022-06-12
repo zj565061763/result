@@ -41,7 +41,12 @@ sealed class FResult<out R> {
 
         @JvmStatic
         fun failure(exception: Exception?): Failure {
-            return Failure(exception ?: FException(message = "unknown"))
+            val finalException = if (exception == null) {
+                FException(message = "unknown")
+            } else {
+                FException.wrap(cause = exception)
+            }
+            return Failure(finalException)
         }
 
         @JvmStatic

@@ -15,6 +15,16 @@ open class FException @JvmOverloads constructor(
     override fun toString(): String {
         return formatMessage
     }
+
+    companion object {
+        @JvmStatic
+        fun wrap(
+            message: String? = "",
+            cause: Throwable? = null,
+        ): FException {
+            return if (cause is FException) cause else FException(message, cause)
+        }
+    }
 }
 
 fun Exception.isLoading(): Boolean {
