@@ -57,6 +57,8 @@ class MainActivity : AppCompatActivity() {
         }.toFResult().onFailure {
             Log.i(TAG, "toFResult onFailure:${it}")
         }
+
+        FResult.failure()
     }
 
     companion object {
