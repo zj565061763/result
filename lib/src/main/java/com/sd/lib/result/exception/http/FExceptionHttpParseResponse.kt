@@ -19,4 +19,14 @@ class FExceptionHttpParseResponse @JvmOverloads constructor(
                 " ($superMessage)"
             }
         }
+
+    companion object {
+        @JvmStatic
+        fun wrap(
+            message: String? = "",
+            cause: Throwable? = null,
+        ): FExceptionHttpParseResponse {
+            return if (cause is FExceptionHttpParseResponse) cause else FExceptionHttpParseResponse(message, cause)
+        }
+    }
 }
