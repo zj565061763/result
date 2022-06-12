@@ -2,4 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sd.lib.result">
 
+    <application>
+        <provider
+            android:name="com.sd.lib.result.ext.LibContentProvider"
+            android:authorities="${applicationId}.f-provider-lib-result"
+            android:exported="false" />
+    </application>
 </manifest>

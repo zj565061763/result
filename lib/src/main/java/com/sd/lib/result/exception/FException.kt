@@ -5,7 +5,7 @@ open class FException @JvmOverloads constructor(
     cause: Throwable? = null,
 ) : Exception(message, cause) {
 
-    protected val formatMessage: String
+    protected open val formatMessage: String
         get() {
             val superMessage = localizedMessage ?: ""
             val causeMessage = cause?.toString() ?: ""

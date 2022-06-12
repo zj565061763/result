@@ -1,8 +1,8 @@
 package com.sd.lib.result.exception.http
 
-import android.content.Context
 import com.sd.lib.result.R
 import com.sd.lib.result.exception.FException
+import com.sd.lib.result.ext.LibContentProvider
 import java.net.SocketTimeoutException
 
 /**
@@ -13,22 +13,19 @@ open class FExceptionHttp @JvmOverloads constructor(
     cause: Throwable? = null,
 ) : FException(message, cause) {
 
-    /** 错误描述 */
-    open fun getDescFormat(context: Context): String {
-        return when (cause) {
-            is SocketTimeoutException -> context.getString(R.string.lib_result_http_desc_exception_timeout)
-            else -> context.getString(R.string.lib_result_http_desc_exception_http)
-        } + toStringAppend()
-    }
-
-    protected fun toStringAppend(): String {
-        val content = toString()
-        return if (content.isEmpty()) {
-            content
-        } else {
-            "，${content}"
+    override val formatMessage: String
+        get() {
+            val superMessage = super.formatMessage
+            val context = LibContentProvider.application ?: return superMessage
+            val currentMessage = when (cause) {
+                null -> ""
+                is SocketTimeoutException -> context.getString(R.string.lib_result_http_desc_exception_timeout)
+                else -> context.getString(R.string.lib_result_http_desc_exception_http)
+            }
+            return currentMessage + if (superMessage.isEmpty()) "" else {
+                " ($superMessage)"
+            }
         }
-    }
 
     companion object {
         @JvmStatic
