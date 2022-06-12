@@ -1,7 +1,8 @@
-package com.sd.lib.result.exception
+package com.sd.lib.result.exception.http
 
 import android.content.Context
 import com.sd.lib.result.R
+import com.sd.lib.result.exception.FException
 import java.net.SocketTimeoutException
 
 /**
