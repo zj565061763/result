@@ -82,8 +82,8 @@ class ExampleInstrumentedTest {
 
     @Test
     fun testFException() {
-        assertEquals(true, FException())
-        assertEquals(false, getResult(100).isFailure())
+        assertEquals("", FException().toString())
+        assertEquals("hello", FException(message = "hello").toString())
     }
 
     companion object {
