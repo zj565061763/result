@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.sd.lib.result.FResult
+import com.sd.lib.result.exception.FException
 import com.sd.lib.result.isFailure
 import com.sd.lib.result.isSuccess
 import com.sd.lib.result.toFResult
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        testExceptionDesc()
 
         getResult(100).onSuccess {
             Log.i(TAG, "100 onSuccess:${it}")
@@ -57,6 +59,11 @@ class MainActivity : AppCompatActivity() {
         }.toFResult().onFailure {
             Log.i(TAG, "toFResult onFailure:${it}")
         }
+    }
+
+    private fun testExceptionDesc() {
+        Log.i(TAG, "1 " + FException().toString())
+        Log.i(TAG, "2 " + FException(message = "hello", cause = RuntimeException("runtime")).toString())
     }
 
     companion object {
