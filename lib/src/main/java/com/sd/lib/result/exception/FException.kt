@@ -42,7 +42,3 @@ fun Exception.isCancellation(): Boolean {
 fun Exception.isStateLoading(): Boolean {
     return this is FExceptionStateLoading
 }
-
-fun Exception.isStateNone(): Boolean {
-    return this is FExceptionStateNone
-}

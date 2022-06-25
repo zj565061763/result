@@ -69,12 +69,6 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun testExceptionStateNone() {
-        assertEquals(true, FExceptionStateNone().isStateNone())
-        assertEquals(false, FException.wrap().isStateNone())
-    }
-
-    @Test
     fun testIsSuccess() {
         assertEquals(true, getResult(100).isSuccess())
         assertEquals(false, getResult(0).isSuccess())
