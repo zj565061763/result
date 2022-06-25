@@ -13,8 +13,7 @@ class FExceptionHttpResponseCode @JvmOverloads constructor(
 
     override val formatCause: String
         get() {
-            val superInfo = super.formatCause
-            val context = LibContentProvider.application ?: return superInfo
+            val context = LibContentProvider.application ?: return super.formatCause
             return buildString {
                 append(context.getString(R.string.lib_result_http_desc_exception_response_code))
                 append("(").append(code).append(")")
