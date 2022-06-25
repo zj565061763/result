@@ -14,11 +14,16 @@ class FExceptionHttpResponseCode @JvmOverloads constructor(
 
     override val formatMessage: String
         get() {
-            val superMessage = super.formatMessage
-            val context = LibContentProvider.application ?: return superMessage
-            val currentMessage = context.getString(R.string.lib_result_http_desc_exception_response_code) + " ($code)"
-            return currentMessage + if (superMessage.isEmpty()) "" else {
-                " ($superMessage)"
+            val context = LibContentProvider.application ?: return super.formatMessage
+            return buildString {
+                val message = localizedMessage ?: context.getString(R.string.lib_result_http_desc_exception_http)
+                val causeInfo = context.getString(R.string.lib_result_http_desc_exception_response_code) + "($code)"
+
+                append(message)
+                if (message.isNotEmpty() && causeInfo.isNotEmpty()) {
+                    append(" ")
+                }
+                append(causeInfo)
             }
         }
 }
