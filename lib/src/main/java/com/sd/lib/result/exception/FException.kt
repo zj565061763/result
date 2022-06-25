@@ -1,7 +1,7 @@
 package com.sd.lib.result.exception
 
 open class FException @JvmOverloads constructor(
-    message: String? = "",
+    message: String? = null,
     cause: Throwable? = null,
 ) : Exception(message, cause) {
 
