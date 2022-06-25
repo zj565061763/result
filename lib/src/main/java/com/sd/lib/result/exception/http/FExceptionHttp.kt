@@ -30,14 +30,4 @@ open class FExceptionHttp @JvmOverloads constructor(
                 append(causeInfo)
             }
         }
-
-    companion object {
-        @JvmStatic
-        fun wrap(
-            message: String? = "",
-            cause: Throwable? = null,
-        ): FExceptionHttp {
-            return if (cause is FExceptionHttp) cause else FExceptionHttp(message, cause)
-        }
-    }
 }
