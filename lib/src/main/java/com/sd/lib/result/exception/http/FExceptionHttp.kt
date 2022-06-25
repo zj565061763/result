@@ -21,6 +21,11 @@ open class FExceptionHttp @JvmOverloads constructor(
 
     companion object {
         @JvmStatic
+        fun wrap(cause: Throwable?): FExceptionHttp {
+            return if (cause is FExceptionHttp) cause else FExceptionHttp(cause = cause)
+        }
+
+        @JvmStatic
         fun getCauseInfo(cause: Throwable?, context: Context?): String {
             if (cause == null || context == null) return ""
             val resName = "lib_result_exception_http_cause_${cause.javaClass.name}"
