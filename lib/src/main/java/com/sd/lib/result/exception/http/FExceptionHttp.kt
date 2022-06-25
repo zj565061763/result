@@ -1,9 +1,8 @@
 package com.sd.lib.result.exception.http
 
-import com.sd.lib.result.R
+import android.content.Context
 import com.sd.lib.result.exception.FException
 import com.sd.lib.result.ext.LibContentProvider
-import java.net.SocketTimeoutException
 
 /**
  * Http异常
@@ -15,11 +14,23 @@ open class FExceptionHttp @JvmOverloads constructor(
 
     override val formatCause: String
         get() {
-            val superInfo = super.formatCause
-            val context = LibContentProvider.application ?: return superInfo
-            return when (cause) {
-                is SocketTimeoutException -> context.getString(R.string.lib_result_exception_http_cause_timeout)
-                else -> superInfo
+            return getCauseInfo(cause, LibContentProvider.application).ifEmpty {
+                super.formatCause
             }
         }
+
+    companion object {
+        @JvmStatic
+        fun getCauseInfo(cause: Throwable?, context: Context?): String {
+            if (cause == null || context == null) return ""
+            val resName = "lib_result_exception_http_cause_${cause.javaClass.name}"
+            return try {
+                val resId = context.resources.getIdentifier(resName, "string", context.packageName)
+                context.getString(resId)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                ""
+            }
+        }
+    }
 }
