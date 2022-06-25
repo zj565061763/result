@@ -5,7 +5,7 @@ package com.sd.lib.result.exception
  */
 open class FExceptionCode @JvmOverloads constructor(
     val code: Int,
-    message: String? = "",
+    message: String? = null,
     cause: Throwable? = null,
 ) : FException(message, cause) {
 
