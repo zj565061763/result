@@ -3,6 +3,6 @@ package com.sd.lib.result.exception
 /**
  * 加载中
  */
-open class FExceptionLoading(
+open class FExceptionStateLoading(
     message: String? = "",
 ) : FException(message)

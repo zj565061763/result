@@ -57,15 +57,21 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun testExceptionLoading() {
-        assertEquals(true, FExceptionLoading().isLoading())
-        assertEquals(false, FException().isLoading())
+    fun testExceptionCancellation() {
+        assertEquals(true, FExceptionCancellation().isCancellation())
+        assertEquals(false, FException.wrap().isCancellation())
     }
 
     @Test
-    fun testExceptionCancellation() {
-        assertEquals(true, FExceptionCancellation().isCancellation())
-        assertEquals(false, FException().isLoading())
+    fun testExceptionStateLoading() {
+        assertEquals(true, FExceptionStateLoading().isStateLoading())
+        assertEquals(false, FException.wrap().isStateLoading())
+    }
+
+    @Test
+    fun testExceptionStateNone() {
+        assertEquals(true, FExceptionStateNone().isStateNone())
+        assertEquals(false, FException.wrap().isStateNone())
     }
 
     @Test

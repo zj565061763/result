@@ -1,6 +1,6 @@
 package com.sd.lib.result.exception
 
-open class FException @JvmOverloads constructor(
+open class FException @JvmOverloads protected constructor(
     message: String? = "",
     cause: Throwable? = null,
 ) : Exception(message, cause) {
@@ -22,15 +22,27 @@ open class FException @JvmOverloads constructor(
             message: String? = "",
             cause: Throwable? = null,
         ): FException {
-            return if (cause is FException) cause else FException(message, cause)
+            return if (cause is FException) {
+                cause
+            } else {
+                if (cause == null && message == null) {
+                    FException(message = "unknown", cause = null)
+                } else {
+                    FException(message, cause)
+                }
+            }
         }
     }
 }
 
-fun Exception.isLoading(): Boolean {
-    return this is FExceptionLoading
-}
-
 fun Exception.isCancellation(): Boolean {
     return this is FExceptionCancellation
+}
+
+fun Exception.isStateLoading(): Boolean {
+    return this is FExceptionStateLoading
+}
+
+fun Exception.isStateNone(): Boolean {
+    return this is FExceptionStateNone
 }

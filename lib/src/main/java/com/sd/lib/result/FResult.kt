@@ -1,8 +1,6 @@
 package com.sd.lib.result
 
-import com.sd.lib.result.exception.FException
-import com.sd.lib.result.exception.FExceptionLoading
-import com.sd.lib.result.exception.isLoading
+import com.sd.lib.result.exception.*
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
@@ -20,8 +18,12 @@ sealed class FResult<out R> {
         }
     }
 
-    fun isLoading(): Boolean {
-        return this is Failure && this.exception.isLoading()
+    fun isStateLoading(): Boolean {
+        return this is Failure && this.exception.isStateLoading()
+    }
+
+    fun isStateNone(): Boolean {
+        return this is Failure && this.exception.isStateNone()
     }
 
     data class Success<out T> internal constructor(val data: T) : FResult<T>()
@@ -36,22 +38,22 @@ sealed class FResult<out R> {
 
         @JvmStatic
         fun failure(message: String? = ""): Failure {
-            return Failure(FException(message = message))
+            return Failure(FException.wrap(message = message))
         }
 
         @JvmStatic
         fun failure(exception: Exception?): Failure {
-            val finalException = if (exception == null) {
-                FException(message = "unknown")
-            } else {
-                FException.wrap(cause = exception)
-            }
-            return Failure(finalException)
+            return Failure(FException.wrap(cause = exception))
         }
 
         @JvmStatic
-        fun loading(msg: String? = ""): Failure {
-            return Failure(FExceptionLoading(msg))
+        fun stateLoading(msg: String? = ""): Failure {
+            return Failure(FExceptionStateLoading(msg))
+        }
+
+        @JvmStatic
+        fun stateNone(): Failure {
+            return Failure(FExceptionStateNone())
         }
     }
 }
@@ -78,6 +80,6 @@ fun <T> Result<T>.toFResult(): FResult<T> {
     return if (isSuccess) {
         FResult.success(getOrNull()!!)
     } else {
-        FResult.failure(FException(cause = exceptionOrNull()!!))
+        FResult.failure(FException.wrap(cause = exceptionOrNull()!!))
     }
 }
