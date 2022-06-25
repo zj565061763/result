@@ -59,13 +59,13 @@ class ExampleInstrumentedTest {
     @Test
     fun testExceptionCancellation() {
         assertEquals(true, FExceptionCancellation().isCancellation())
-        assertEquals(false, FException.wrap().isCancellation())
+        assertEquals(false, FException().isCancellation())
     }
 
     @Test
     fun testExceptionStateLoading() {
         assertEquals(true, FExceptionStateLoading().isStateLoading())
-        assertEquals(false, FException.wrap().isStateLoading())
+        assertEquals(false, FException().isStateLoading())
     }
 
     @Test
@@ -77,6 +77,12 @@ class ExampleInstrumentedTest {
     @Test
     fun testIsFailure() {
         assertEquals(true, getResult(0).isFailure())
+        assertEquals(false, getResult(100).isFailure())
+    }
+
+    @Test
+    fun testFException() {
+        assertEquals(true, FException())
         assertEquals(false, getResult(100).isFailure())
     }
 

@@ -36,12 +36,13 @@ sealed class FResult<out R> {
 
         @JvmStatic
         fun failure(message: String? = ""): Failure {
-            return Failure(FException.wrap(message = message))
+            return Failure(FException(message = message))
         }
 
         @JvmStatic
-        fun failure(exception: Exception?): Failure {
-            return Failure(FException.wrap(cause = exception))
+        fun failure(cause: Throwable?): Failure {
+            val exception = if (cause is FException) cause else FException(cause = cause)
+            return Failure(exception)
         }
 
         @JvmStatic
@@ -73,6 +74,6 @@ fun <T> Result<T>.toFResult(): FResult<T> {
     return if (isSuccess) {
         FResult.success(getOrNull()!!)
     } else {
-        FResult.failure(FException.wrap(cause = exceptionOrNull()!!))
+        FResult.failure(exceptionOrNull()!!)
     }
 }
