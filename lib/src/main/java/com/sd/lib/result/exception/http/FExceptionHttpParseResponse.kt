@@ -10,13 +10,19 @@ class FExceptionHttpParseResponse @JvmOverloads constructor(
     message: String? = "",
     cause: Throwable? = null,
 ) : FExceptionHttp(message, cause) {
+
     override val formatMessage: String
         get() {
-            val superMessage = super.formatMessage
-            val context = LibContentProvider.application ?: return superMessage
-            val currentMessage = context.getString(R.string.lib_result_http_desc_exception_parse_response)
-            return currentMessage + if (superMessage.isEmpty()) "" else {
-                " ($superMessage)"
+            val context = LibContentProvider.application ?: return super.formatMessage
+            return buildString {
+                val message = localizedMessage ?: context.getString(R.string.lib_result_http_desc_exception_http)
+                val causeInfo = context.getString(R.string.lib_result_http_desc_exception_parse_response)
+
+                append(message)
+                if (message.isNotEmpty() && causeInfo.isNotEmpty()) {
+                    append(" ")
+                }
+                append(causeInfo)
             }
         }
 }
