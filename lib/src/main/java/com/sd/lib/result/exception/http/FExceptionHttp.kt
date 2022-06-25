@@ -18,7 +18,7 @@ open class FExceptionHttp @JvmOverloads constructor(
             val superInfo = super.formatCause
             val context = LibContentProvider.application ?: return superInfo
             return when (cause) {
-                is SocketTimeoutException -> context.getString(R.string.lib_result_http_desc_exception_timeout)
+                is SocketTimeoutException -> context.getString(R.string.lib_result_exception_http_cause_timeout)
                 else -> superInfo
             }
         }

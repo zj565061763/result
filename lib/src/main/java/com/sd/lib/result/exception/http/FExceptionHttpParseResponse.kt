@@ -14,6 +14,6 @@ class FExceptionHttpParseResponse @JvmOverloads constructor(
     override val formatCause: String
         get() {
             val context = LibContentProvider.application ?: return super.formatCause
-            return context.getString(R.string.lib_result_http_desc_exception_parse_response)
+            return context.getString(R.string.lib_result_exception_http_cause_parse_response)
         }
 }

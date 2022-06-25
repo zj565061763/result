@@ -15,7 +15,7 @@ class FExceptionHttpResponseCode @JvmOverloads constructor(
         get() {
             val context = LibContentProvider.application ?: return super.formatCause
             return buildString {
-                append(context.getString(R.string.lib_result_http_desc_exception_response_code))
+                append(context.getString(R.string.lib_result_exception_http_cause_response_code))
                 append("(").append(code).append(")")
             }
         }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="lib_result_http_desc_exception_parse_response">数据解析异常</string>
-    <string name="lib_result_http_desc_exception_response_code">服务器异常</string>
-    <string name="lib_result_http_desc_exception_timeout">连接超时</string>
+    <string name="lib_result_exception_http_cause_parse_response">数据解析异常</string>
+    <string name="lib_result_exception_http_cause_response_code">服务器异常</string>
+    <string name="lib_result_exception_http_cause_timeout">连接超时</string>
 </resources>
