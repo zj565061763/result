@@ -70,11 +70,10 @@ class MainActivity : AppCompatActivity() {
         Log.i(TAG, "1 " + FException().toString())
         Log.i(TAG, "2 " + FException(message = "hello", cause = RuntimeException("runtime")).toString())
         Log.i(TAG, "3 " + FExceptionCode(100).toString())
-
+        Log.i(TAG, "--------------------")
         Log.i(TAG, "4 " + FExceptionHttp().toString())
         Log.i(TAG, "5 " + FExceptionHttp(cause = RuntimeException("http error")).toString())
         Log.i(TAG, "6 " + FExceptionHttp(message = "接口请求失败", cause = SocketTimeoutException()).toString())
-
         Log.i(TAG, "7 " + FExceptionHttpResponseCode(404).toString())
         Log.i(TAG, "8 " + FExceptionHttpParseResponse().toString())
     }
