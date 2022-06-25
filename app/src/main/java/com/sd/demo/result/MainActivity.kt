@@ -7,6 +7,8 @@ import com.sd.lib.result.FResult
 import com.sd.lib.result.exception.FException
 import com.sd.lib.result.exception.FExceptionCode
 import com.sd.lib.result.exception.http.FExceptionHttp
+import com.sd.lib.result.exception.http.FExceptionHttpParseResponse
+import com.sd.lib.result.exception.http.FExceptionHttpResponseCode
 import com.sd.lib.result.isFailure
 import com.sd.lib.result.isSuccess
 import com.sd.lib.result.toFResult
@@ -72,6 +74,9 @@ class MainActivity : AppCompatActivity() {
         Log.i(TAG, "4 " + FExceptionHttp().toString())
         Log.i(TAG, "5 " + FExceptionHttp(cause = RuntimeException("http error")).toString())
         Log.i(TAG, "6 " + FExceptionHttp(message = "接口请求失败", cause = SocketTimeoutException()).toString())
+
+        Log.i(TAG, "7 " + FExceptionHttpResponseCode(404).toString())
+        Log.i(TAG, "8 " + FExceptionHttpParseResponse().toString())
     }
 
     companion object {
