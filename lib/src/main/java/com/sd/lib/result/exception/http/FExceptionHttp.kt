@@ -13,15 +13,6 @@ open class FExceptionHttp @JvmOverloads constructor(
     cause: Throwable? = null,
 ) : FException(message, cause) {
 
-    override val formatMessage: String
-        get() {
-            val superInfo = super.formatMessage
-            val context = LibContentProvider.application ?: return superInfo
-            return superInfo.ifEmpty {
-                context.getString(R.string.lib_result_http_desc_exception_http)
-            }
-        }
-
     override val formatCause: String
         get() {
             val superInfo = super.formatCause
