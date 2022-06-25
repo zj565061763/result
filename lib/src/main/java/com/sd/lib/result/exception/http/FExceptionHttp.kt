@@ -15,19 +15,19 @@ open class FExceptionHttp @JvmOverloads constructor(
 
     override val formatMessage: String
         get() {
-            val context = LibContentProvider.application ?: return super.formatMessage
-            return buildString {
-                val message = localizedMessage ?: context.getString(R.string.lib_result_http_desc_exception_http)
-                val causeInfo = when (cause) {
-                    is SocketTimeoutException -> context.getString(R.string.lib_result_http_desc_exception_timeout)
-                    else -> ""
-                }
+            val superInfo = super.formatMessage
+            val context = LibContentProvider.application ?: return superInfo
+            return superInfo.ifEmpty {
+                context.getString(R.string.lib_result_http_desc_exception_http)
+            }
+        }
 
-                append(message)
-                if (message.isNotEmpty() && causeInfo.isNotEmpty()) {
-                    append(" ")
-                }
-                append(causeInfo)
+    override val formatCause: String
+        get() {
+            val context = LibContentProvider.application ?: return super.formatCause
+            return when (cause) {
+                is SocketTimeoutException -> context.getString(R.string.lib_result_http_desc_exception_timeout)
+                else -> super.formatCause
             }
         }
 }
