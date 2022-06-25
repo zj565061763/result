@@ -3,5 +3,5 @@
     <string name="lib_result_http_desc_exception_http">请求失败</string>
     <string name="lib_result_http_desc_exception_parse_response">数据解析异常</string>
     <string name="lib_result_http_desc_exception_response_code">服务器异常</string>
-    <string name="lib_result_http_desc_exception_timeout">请求超时</string>
+    <string name="lib_result_http_desc_exception_timeout">连接超时</string>
 </resources>
