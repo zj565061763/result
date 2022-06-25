@@ -7,9 +7,10 @@ open class FException @JvmOverloads protected constructor(
 
     protected open val formatMessage: String
         get() {
-            val superMessage = localizedMessage ?: ""
-            val causeMessage = cause?.toString() ?: ""
-            return superMessage + causeMessage
+            return buildString {
+                append(localizedMessage ?: "")
+                append(cause?.toString() ?: "")
+            }
         }
 
     override fun toString(): String {
