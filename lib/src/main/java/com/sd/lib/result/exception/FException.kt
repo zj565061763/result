@@ -8,8 +8,14 @@ open class FException @JvmOverloads protected constructor(
     protected open val formatMessage: String
         get() {
             return buildString {
-                append(localizedMessage ?: "")
-                append(cause?.toString() ?: "")
+                val message = localizedMessage ?: ""
+                val causeInfo = cause?.toString() ?: ""
+
+                append(message)
+                if (message.isNotEmpty() && causeInfo.isNotEmpty()) {
+                    append(" ")
+                }
+                append(causeInfo)
             }
         }
 
