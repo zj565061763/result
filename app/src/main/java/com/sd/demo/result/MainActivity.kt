@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG, "0 onFailure:${it}")
         }
 
-        val loadingResult = FResult.loading("")
+        val loadingResult = FResult.loading("loading")
         Log.i(TAG, "isLoading:${loadingResult.isLoading()}")
 
         val result100 = getResult(100)

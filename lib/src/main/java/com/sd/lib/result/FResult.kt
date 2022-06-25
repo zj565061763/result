@@ -35,7 +35,7 @@ sealed class FResult<out R> {
         }
 
         @JvmStatic
-        fun failure(message: String? = ""): Failure {
+        fun failure(message: String? = null): Failure {
             return Failure(FException(message = message))
         }
 
@@ -46,7 +46,7 @@ sealed class FResult<out R> {
         }
 
         @JvmStatic
-        fun loading(msg: String? = ""): Failure {
+        fun loading(msg: String? = null): Failure {
             return Failure(FExceptionLoading(msg))
         }
     }
