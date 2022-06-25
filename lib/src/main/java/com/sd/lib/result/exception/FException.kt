@@ -29,6 +29,13 @@ open class FException @JvmOverloads constructor(
     override fun toString(): String {
         return desc
     }
+
+    companion object {
+        @JvmStatic
+        fun wrap(cause: Throwable?): FException {
+            return if (cause is FException) cause else FException(cause = cause)
+        }
+    }
 }
 
 fun Exception.isCancellation(): Boolean {

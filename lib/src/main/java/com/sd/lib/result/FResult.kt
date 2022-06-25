@@ -41,8 +41,7 @@ sealed class FResult<out R> {
 
         @JvmStatic
         fun failure(cause: Throwable?): Failure {
-            val exception = if (cause is FException) cause else FException(cause = cause)
-            return Failure(exception)
+            return Failure(FException.wrap(cause))
         }
 
         @JvmStatic
