@@ -8,7 +8,7 @@ import com.sd.lib.result.ext.LibContentProvider
  */
 class FExceptionHttpResponseCode @JvmOverloads constructor(
     val code: Int,
-    message: String? = "",
+    message: String? = null,
 ) : FExceptionHttp(message = message) {
 
     override val formatCause: String

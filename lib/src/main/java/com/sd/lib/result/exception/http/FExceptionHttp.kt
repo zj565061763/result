@@ -9,7 +9,7 @@ import java.net.SocketTimeoutException
  * Http异常
  */
 open class FExceptionHttp @JvmOverloads constructor(
-    message: String? = "",
+    message: String? = null,
     cause: Throwable? = null,
 ) : FException(message, cause) {
 
