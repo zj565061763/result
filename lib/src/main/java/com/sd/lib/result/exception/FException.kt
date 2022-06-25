@@ -8,19 +8,19 @@ open class FException @JvmOverloads constructor(
     open val desc: String
         get() = buildString {
             val message = formatMessage
-            append(message)
+            val cause = formatCause
 
-            val causeInfo = formatCauseInfo
-            if (message.isNotEmpty() && causeInfo.isNotEmpty()) {
+            append(message)
+            if (message.isNotEmpty() && cause.isNotEmpty()) {
                 append(" ")
             }
-            append(causeInfo)
+            append(cause)
         }
 
     protected open val formatMessage: String
         get() = localizedMessage ?: ""
 
-    protected open val formatCauseInfo: String
+    protected open val formatCause: String
         get() = cause?.toString() ?: ""
 
     override fun toString(): String {
