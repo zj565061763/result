@@ -5,6 +5,7 @@ open class FException @JvmOverloads constructor(
     cause: Throwable? = null,
 ) : Exception(message, cause) {
 
+    /** 异常描述 */
     open val desc: String
         get() = buildString {
             val message = formatMessage
@@ -17,9 +18,11 @@ open class FException @JvmOverloads constructor(
             append(cause)
         }
 
+    /** 异常信息 */
     protected open val formatMessage: String
         get() = localizedMessage ?: ""
 
+    /** 异常原因 */
     protected open val formatCause: String
         get() = cause?.toString() ?: ""
 
