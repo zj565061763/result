@@ -5,20 +5,26 @@ open class FException @JvmOverloads constructor(
     cause: Throwable? = null,
 ) : Exception(message, cause) {
 
-    protected open val formatMessage: String
+    open val desc: String
         get() = buildString {
-            val message = localizedMessage ?: ""
-            val causeInfo = cause?.toString() ?: ""
-
+            val message = formatMessage
             append(message)
+
+            val causeInfo = formatCauseInfo
             if (message.isNotEmpty() && causeInfo.isNotEmpty()) {
                 append(" ")
             }
             append(causeInfo)
         }
 
+    protected open val formatMessage: String
+        get() = localizedMessage ?: ""
+
+    protected open val formatCauseInfo: String
+        get() = cause?.toString() ?: ""
+
     override fun toString(): String {
-        return formatMessage
+        return desc
     }
 }
 
