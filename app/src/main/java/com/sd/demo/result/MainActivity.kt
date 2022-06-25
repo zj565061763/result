@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.sd.lib.result.FResult
 import com.sd.lib.result.exception.FException
-import com.sd.lib.result.exception.FExceptionCode
 import com.sd.lib.result.exception.http.FExceptionHttp
 import com.sd.lib.result.exception.http.FExceptionHttpParseResponse
 import com.sd.lib.result.exception.http.FExceptionHttpResponseCode
@@ -68,14 +67,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun testExceptionDesc() {
         Log.i(TAG, "1 " + FException().toString())
-        Log.i(TAG, "2 " + FException(message = "hello", cause = RuntimeException("runtime")).toString())
-        Log.i(TAG, "3 " + FExceptionCode(100).toString())
+        Log.i(TAG, "2 " + FException(message = "error", cause = RuntimeException("runtime")).toString())
         Log.i(TAG, "--------------------")
-        Log.i(TAG, "4 " + FExceptionHttp().toString())
-        Log.i(TAG, "5 " + FExceptionHttp(cause = RuntimeException("http error")).toString())
-        Log.i(TAG, "6 " + FExceptionHttp(message = "接口请求失败", cause = SocketTimeoutException()).toString())
-        Log.i(TAG, "7 " + FExceptionHttpResponseCode(404).toString())
-        Log.i(TAG, "8 " + FExceptionHttpParseResponse().toString())
+        Log.i(TAG, "1 " + FExceptionHttp().toString())
+        Log.i(TAG, "2 " + FExceptionHttp(message = "error", cause = RuntimeException("runtime")).toString())
+        Log.i(TAG, "3 " + FExceptionHttp(cause = SocketTimeoutException()).toString())
+        Log.i(TAG, "4 " + FExceptionHttpResponseCode(404).toString())
+        Log.i(TAG, "5 " + FExceptionHttpParseResponse().toString())
     }
 
     companion object {
