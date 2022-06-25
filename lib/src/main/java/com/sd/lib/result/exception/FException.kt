@@ -6,17 +6,15 @@ open class FException @JvmOverloads constructor(
 ) : Exception(message, cause) {
 
     protected open val formatMessage: String
-        get() {
-            return buildString {
-                val message = localizedMessage ?: ""
-                val causeInfo = cause?.toString() ?: ""
+        get() = buildString {
+            val message = localizedMessage ?: ""
+            val causeInfo = cause?.toString() ?: ""
 
-                append(message)
-                if (message.isNotEmpty() && causeInfo.isNotEmpty()) {
-                    append(" ")
-                }
-                append(causeInfo)
+            append(message)
+            if (message.isNotEmpty() && causeInfo.isNotEmpty()) {
+                append(" ")
             }
+            append(causeInfo)
         }
 
     override fun toString(): String {

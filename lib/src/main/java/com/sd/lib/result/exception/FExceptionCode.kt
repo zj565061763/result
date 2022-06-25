@@ -9,7 +9,9 @@ open class FExceptionCode @JvmOverloads constructor(
     cause: Throwable? = null,
 ) : FException(message, cause) {
 
-    override fun toString(): String {
-        return "${super.toString()} code:${code}"
-    }
+    override val formatMessage: String
+        get() = buildString {
+            append(super.formatMessage)
+            append(" code:").append(code)
+        }
 }
