@@ -12,6 +12,6 @@ open class FExceptionCode @JvmOverloads constructor(
     override val formatMessage: String
         get() = buildString {
             append(super.formatMessage)
-            append("(").append(code).append(")")
+            append("(code:").append(code).append(")")
         }
 }
