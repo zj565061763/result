@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.sd.lib.result.FResult
 import com.sd.lib.result.exception.FException
+import com.sd.lib.result.exception.FExceptionCode
 import com.sd.lib.result.isFailure
 import com.sd.lib.result.isSuccess
 import com.sd.lib.result.toFResult
@@ -64,6 +65,7 @@ class MainActivity : AppCompatActivity() {
     private fun testExceptionDesc() {
         Log.i(TAG, "1 " + FException().toString())
         Log.i(TAG, "2 " + FException(message = "hello", cause = RuntimeException("runtime")).toString())
+        Log.i(TAG, "3 " + FExceptionCode(100, message = "code").toString())
     }
 
     companion object {
