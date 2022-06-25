@@ -1,8 +1,8 @@
 package com.sd.lib.result
 
 import com.sd.lib.result.exception.FException
-import com.sd.lib.result.exception.FExceptionStateLoading
-import com.sd.lib.result.exception.isStateLoading
+import com.sd.lib.result.exception.FExceptionLoading
+import com.sd.lib.result.exception.isLoading
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
@@ -20,8 +20,8 @@ sealed class FResult<out R> {
         }
     }
 
-    fun isStateLoading(): Boolean {
-        return this is Failure && this.exception.isStateLoading()
+    fun isLoading(): Boolean {
+        return this is Failure && this.exception.isLoading()
     }
 
     data class Success<out T> internal constructor(val data: T) : FResult<T>()
@@ -46,8 +46,8 @@ sealed class FResult<out R> {
         }
 
         @JvmStatic
-        fun stateLoading(msg: String? = ""): Failure {
-            return Failure(FExceptionStateLoading(msg))
+        fun loading(msg: String? = ""): Failure {
+            return Failure(FExceptionLoading(msg))
         }
     }
 }

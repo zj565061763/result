@@ -28,6 +28,6 @@ fun Exception.isCancellation(): Boolean {
     return this is FExceptionCancellation
 }
 
-fun Exception.isStateLoading(): Boolean {
-    return this is FExceptionStateLoading
+fun Exception.isLoading(): Boolean {
+    return this is FExceptionLoading
 }

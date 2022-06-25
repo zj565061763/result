@@ -63,9 +63,9 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun testExceptionStateLoading() {
-        assertEquals(true, FExceptionStateLoading().isStateLoading())
-        assertEquals(false, FException().isStateLoading())
+    fun testExceptionLoading() {
+        assertEquals(true, FExceptionLoading().isLoading())
+        assertEquals(false, FException().isLoading())
     }
 
     @Test

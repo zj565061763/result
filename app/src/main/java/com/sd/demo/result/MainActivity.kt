@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG, "0 onFailure:${it}")
         }
 
-        val loadingResult = FResult.stateLoading("")
-        Log.i(TAG, "isStateLoading:${loadingResult.isStateLoading()}")
+        val loadingResult = FResult.loading("")
+        Log.i(TAG, "isLoading:${loadingResult.isLoading()}")
 
         val result100 = getResult(100)
         if (result100.isSuccess()) {
