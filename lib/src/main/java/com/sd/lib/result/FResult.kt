@@ -69,6 +69,14 @@ fun <T> FResult<T>.isFailure(): Boolean {
     return this is FResult.Failure
 }
 
+inline fun <F, T> FResult<F>.map(block: (F) -> T): FResult<T> {
+    return if (isFailure()) {
+        this
+    } else {
+        FResult.success(block(data))
+    }
+}
+
 fun <T> Result<T>.toFResult(): FResult<T> {
     return if (isSuccess) {
         FResult.success(getOrNull()!!)
