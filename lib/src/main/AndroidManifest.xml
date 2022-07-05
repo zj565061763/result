@@ -5,7 +5,7 @@
     <application>
         <provider
             android:name="com.sd.lib.result.ext.LibContentProvider"
-            android:authorities="${applicationId}.f-provider-lib-result"
+            android:authorities="${applicationId}.f-cp-lib-result"
             android:exported="false" />
     </application>
 </manifest>
