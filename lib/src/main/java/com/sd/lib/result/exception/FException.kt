@@ -6,7 +6,7 @@ open class FException @JvmOverloads constructor(
 ) : Exception(message, cause) {
 
     /** 异常描述 */
-    open val desc: String
+    val desc: String
         get() = buildString {
             val message = formatMessage
             val cause = formatCause
