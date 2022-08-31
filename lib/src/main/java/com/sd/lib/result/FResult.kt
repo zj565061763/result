@@ -69,6 +69,14 @@ fun <T> FResult<T>.isFailure(): Boolean {
     return this is FResult.Failure
 }
 
+inline fun <R> fCatching(block: () -> R): FResult<R> {
+    return try {
+        FResult.success(block())
+    } catch (e: Throwable) {
+        FResult.failure(e)
+    }
+}
+
 inline fun <F, T> FResult<F>.map(block: (F) -> T): FResult<T> {
     return if (isFailure()) {
         this
