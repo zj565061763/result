@@ -6,7 +6,7 @@ plugins {
 
 def libGroupId = "com.sd.lib.android"
 def libArtifactId = "result"
-def libVersionName = "1.1.0-beta09"
+def libVersionName = "1.1.0-beta10"
 
 android {
     namespace 'com.sd.lib.result'
