@@ -77,18 +77,18 @@ inline fun <R> fCatching(block: () -> R): FResult<R> {
     }
 }
 
-inline fun <F, T> FResult<F>.map(block: (F) -> T): FResult<T> {
-    return if (isFailure()) {
-        this
-    } else {
-        FResult.success(block(data))
-    }
-}
-
 fun <T> Result<T>.toFResult(): FResult<T> {
     return if (isSuccess) {
         FResult.success(getOrNull()!!)
     } else {
         FResult.failure(exceptionOrNull()!!)
+    }
+}
+
+fun <T> FResult<T>.toResult(): Result<T> {
+    return if (isSuccess()) {
+        Result.success(data)
+    } else {
+        Result.failure(exception)
     }
 }
