@@ -9,6 +9,7 @@ def libArtifactId = "result"
 def libVersionName = "1.1.0-beta09"
 
 android {
+    namespace 'com.sd.lib.result'
     compileSdk 32
     defaultConfig {
         minSdk 21
