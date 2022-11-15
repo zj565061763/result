@@ -2,7 +2,6 @@ package com.sd.lib.result
 
 import com.sd.lib.result.exception.FException
 import com.sd.lib.result.exception.FExceptionLoading
-import com.sd.lib.result.exception.isLoading
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
@@ -18,10 +17,6 @@ sealed class FResult<out R> {
         if (this is Failure) {
             block(exception)
         }
-    }
-
-    fun isLoading(): Boolean {
-        return this is Failure && this.exception.isLoading()
     }
 
     data class Success<out T> internal constructor(val data: T) : FResult<T>()
@@ -67,6 +62,15 @@ fun <T> FResult<T>.isFailure(): Boolean {
         returns(false) implies (this@isFailure is FResult.Success<T>)
     }
     return this is FResult.Failure
+}
+
+@OptIn(ExperimentalContracts::class)
+fun <T> FResult<T>.isLoading(): Boolean {
+    contract {
+        returns(true) implies (this@isLoading is FResult.Failure)
+        returns(false) implies (this@isLoading is FResult.Success<T>)
+    }
+    return this is FResult.Failure && this.exception is FExceptionLoading
 }
 
 inline fun <R> fCatching(block: () -> R): FResult<R> {

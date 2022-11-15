@@ -3,14 +3,11 @@ package com.sd.demo.result
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.sd.lib.result.FResult
+import com.sd.lib.result.*
 import com.sd.lib.result.exception.FException
 import com.sd.lib.result.exception.http.FExceptionHttp
 import com.sd.lib.result.exception.http.FExceptionHttpParseResponse
 import com.sd.lib.result.exception.http.FExceptionHttpResponseCode
-import com.sd.lib.result.isFailure
-import com.sd.lib.result.isSuccess
-import com.sd.lib.result.toFResult
 import java.net.SocketTimeoutException
 
 class MainActivity : AppCompatActivity() {
