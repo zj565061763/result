@@ -64,12 +64,7 @@ fun <T> FResult<T>.isFailure(): Boolean {
     return this is FResult.Failure
 }
 
-@OptIn(ExperimentalContracts::class)
 fun <T> FResult<T>.isLoading(): Boolean {
-    contract {
-        returns(true) implies (this@isLoading is FResult.Failure)
-        returns(false) implies (this@isLoading is FResult.Success<T>)
-    }
     return this is FResult.Failure && this.exception is FExceptionLoading
 }
 
