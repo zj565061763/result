@@ -1,8 +1,8 @@
 package com.sd.lib.result.exception.http
 
 import android.content.Context
+import com.sd.lib.context.FContext
 import com.sd.lib.result.exception.FException
-import com.sd.lib.result.ext.LibContentProvider
 
 /**
  * Http异常
@@ -14,7 +14,7 @@ open class FExceptionHttp @JvmOverloads constructor(
 
     override val formatCause: String
         get() {
-            return getCauseInfo(cause, LibContentProvider.application).ifEmpty {
+            return getCauseInfo(cause, FContext.get()).ifEmpty {
                 super.formatCause
             }
         }
