@@ -37,11 +37,3 @@ open class FException @JvmOverloads constructor(
         }
     }
 }
-
-fun Exception.isCancellation(): Boolean {
-    return this is FExceptionCancellation
-}
-
-fun Exception.isLoading(): Boolean {
-    return this is FExceptionLoading
-}

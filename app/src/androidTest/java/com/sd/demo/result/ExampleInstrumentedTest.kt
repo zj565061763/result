@@ -57,18 +57,6 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun testExceptionCancellation() {
-        assertEquals(true, FExceptionCancellation().isCancellation())
-        assertEquals(false, FException().isCancellation())
-    }
-
-    @Test
-    fun testExceptionLoading() {
-        assertEquals(true, FExceptionLoading().isLoading())
-        assertEquals(false, FException().isLoading())
-    }
-
-    @Test
     fun testIsSuccess() {
         assertEquals(true, getResult(100).isSuccess())
         assertEquals(false, getResult(0).isSuccess())
