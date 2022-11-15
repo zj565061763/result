@@ -72,7 +72,7 @@ class ExampleInstrumentedTest {
     fun testFException() {
         assertEquals("", FException().toString())
         assertEquals("hello", FException(message = "hello").toString())
-        assertEquals("java.lang.RuntimeException", FException(cause = RuntimeException()).toString())
+        assertEquals("hello java.lang.RuntimeException", FException(message = "hello", cause = RuntimeException()).toString())
     }
 
     companion object {
