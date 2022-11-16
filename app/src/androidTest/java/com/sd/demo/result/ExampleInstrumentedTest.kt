@@ -69,6 +69,14 @@ class ExampleInstrumentedTest {
     }
 
     @Test
+    fun testIsLoading() {
+        val result = FResult.loading("loading")
+        assertEquals(true, result.isFailure())
+        assertEquals(false, result.isSuccess())
+        assertEquals("loading", result.exception.toString())
+    }
+
+    @Test
     fun testFException() {
         assertEquals("", FException().toString())
         assertEquals("hello", FException(message = "hello").toString())
