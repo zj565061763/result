@@ -73,6 +73,9 @@ class ExampleInstrumentedTest {
         assertEquals(true, result.isFailure())
         assertEquals(false, result.isSuccess())
         assertEquals("loading", result.exception.toString())
+
+        assertEquals(false, FResult.success("").isLoading())
+        assertEquals(false, FResult.failure("").isLoading())
     }
 
     @Test
