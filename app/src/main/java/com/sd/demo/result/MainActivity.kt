@@ -17,9 +17,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         testExceptionDesc()
 
-        val loadingResult = FResult.loading("loading")
-        logMsg { "isLoading:${loadingResult.isLoading()}" }
-
         val result100 = getResult(100)
         if (result100.isSuccess()) {
             logMsg { "isSuccess:${result100.data}" }
