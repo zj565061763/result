@@ -3,11 +3,12 @@ package com.sd.demo.result
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.sd.lib.result.*
+import com.sd.lib.result.FResult
 import com.sd.lib.result.exception.FException
 import com.sd.lib.result.exception.http.FExceptionHttp
 import com.sd.lib.result.exception.http.FExceptionHttpParseResponse
 import com.sd.lib.result.exception.http.FExceptionHttpResponseCode
+import com.sd.lib.result.toFResult
 import java.net.SocketTimeoutException
 
 class MainActivity : AppCompatActivity() {
@@ -16,20 +17,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         testExceptionDesc()
-
-        val result100 = getResult(100)
-        if (result100.isSuccess()) {
-            logMsg { "isSuccess:${result100.data}" }
-        } else {
-            logMsg { "isFailure:${result100.exception}" }
-        }
-
-        val result0 = getResult(0)
-        if (result0.isFailure()) {
-            logMsg { "isFailure:${result0.exception}" }
-        } else {
-            logMsg { "isSuccess:${result0.data}" }
-        }
 
         runCatching {
             "success"
