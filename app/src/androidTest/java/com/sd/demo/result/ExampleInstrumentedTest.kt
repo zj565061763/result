@@ -58,12 +58,24 @@ class ExampleInstrumentedTest {
     fun testIsSuccess() {
         assertEquals(true, getResult(100).isSuccess())
         assertEquals(false, getResult(0).isSuccess())
+
+        getResult(100).let {
+            if (it.isSuccess()) {
+                assertEquals(100, it.data)
+            }
+        }
     }
 
     @Test
     fun testIsFailure() {
         assertEquals(true, getResult(0).isFailure())
         assertEquals(false, getResult(100).isFailure())
+
+        getResult(0).let {
+            if (it.isFailure()) {
+                assertEquals("error", it.exception.toString())
+            }
+        }
     }
 
     @Test
