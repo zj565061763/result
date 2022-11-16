@@ -84,18 +84,11 @@ class ExampleInstrumentedTest {
         assertEquals(true, result.isLoading())
         assertEquals(true, result.isFailure())
         assertEquals(false, result.isSuccess())
-        assertEquals("loading", result.exception.toString())
+        assertEquals("loading", (result as FResult.Failure).exception.toString())
 
         assertEquals(false, FResult.success("").isLoading())
         assertEquals(false, FResult.failure("").isLoading())
         assertEquals(true, FResult.failure(FExceptionLoading()).isLoading())
-    }
-
-    @Test
-    fun testFException() {
-        assertEquals("", FException().toString())
-        assertEquals("hello", FException(message = "hello").toString())
-        assertEquals("hello java.lang.RuntimeException", FException(message = "hello", cause = RuntimeException()).toString())
     }
 
     @Test
@@ -106,6 +99,23 @@ class ExampleInstrumentedTest {
         assertEquals(true, result.isSuccess())
         assertEquals(false, result.isFailure())
         assertEquals("success", (result as FResult.Success<String>).data)
+    }
+
+    @Test
+    fun testCatchingFailure() {
+        val result = fCatching {
+            throw RuntimeException()
+        }
+        assertEquals(true, result.isFailure())
+        assertEquals(false, result.isSuccess())
+        assertEquals("java.lang.RuntimeException", (result as FResult.Failure).exception.toString())
+    }
+
+    @Test
+    fun testFException() {
+        assertEquals("", FException().toString())
+        assertEquals("hello", FException(message = "hello").toString())
+        assertEquals("hello java.lang.RuntimeException", FException(message = "hello", cause = RuntimeException()).toString())
     }
 
     companion object {
