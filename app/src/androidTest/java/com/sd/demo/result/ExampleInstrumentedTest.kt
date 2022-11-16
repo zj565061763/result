@@ -1,11 +1,8 @@
 package com.sd.demo.result
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.sd.lib.result.FResult
+import com.sd.lib.result.*
 import com.sd.lib.result.exception.*
-import com.sd.lib.result.fCatching
-import com.sd.lib.result.isFailure
-import com.sd.lib.result.isSuccess
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -72,6 +69,7 @@ class ExampleInstrumentedTest {
     @Test
     fun testIsLoading() {
         val result = FResult.loading("loading")
+        assertEquals(true, result.isLoading())
         assertEquals(true, result.isFailure())
         assertEquals(false, result.isSuccess())
         assertEquals("loading", result.exception.toString())
