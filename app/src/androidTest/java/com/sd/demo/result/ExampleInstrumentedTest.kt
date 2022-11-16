@@ -92,16 +92,24 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun testFCatchingSuccess() {
+    fun testCatchingSuccess() {
         testCatchingResultSuccess(
             fCatching { "success" }
+        )
+
+        testCatchingResultSuccess(
+            runCatching { "success" }.toFResult()
         )
     }
 
     @Test
-    fun testFCatchingFailure() {
+    fun testCatchingFailure() {
         testCatchingResultFailure(
             fCatching { throw RuntimeException() }
+        )
+
+        testCatchingResultFailure(
+            runCatching { throw RuntimeException() }.toFResult()
         )
     }
 
