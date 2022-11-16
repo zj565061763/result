@@ -3,6 +3,7 @@ package com.sd.demo.result
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.sd.lib.result.FResult
 import com.sd.lib.result.exception.*
+import com.sd.lib.result.fCatching
 import com.sd.lib.result.isFailure
 import com.sd.lib.result.isSuccess
 import org.junit.Assert.assertEquals
@@ -81,6 +82,16 @@ class ExampleInstrumentedTest {
         assertEquals("", FException().toString())
         assertEquals("hello", FException(message = "hello").toString())
         assertEquals("hello java.lang.RuntimeException", FException(message = "hello", cause = RuntimeException()).toString())
+    }
+
+    @Test
+    fun testCatchingSuccess() {
+        val result = fCatching {
+            "success"
+        }
+        assertEquals(true, result.isSuccess())
+        assertEquals(false, result.isFailure())
+        assertEquals("success", (result as FResult.Success<String>).data)
     }
 
     companion object {
