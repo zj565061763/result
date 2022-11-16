@@ -93,18 +93,16 @@ class ExampleInstrumentedTest {
 
     @Test
     fun testFCatchingSuccess() {
-        val result = fCatching {
-            "success"
-        }
-        testCatchingResultSuccess(result)
+        testCatchingResultSuccess(
+            fCatching { "success" }
+        )
     }
 
     @Test
     fun testFCatchingFailure() {
-        val result = fCatching {
-            throw RuntimeException()
-        }
-        testCatchingResultFailure(result)
+        testCatchingResultFailure(
+            fCatching { throw RuntimeException() }
+        )
     }
 
     @Test
