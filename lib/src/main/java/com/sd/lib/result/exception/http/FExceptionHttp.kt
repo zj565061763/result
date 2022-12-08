@@ -1,7 +1,6 @@
 package com.sd.lib.result.exception.http
 
-import android.content.Context
-import com.sd.lib.context.FContext
+import com.sd.lib.ctx.fContext
 import com.sd.lib.result.exception.FException
 
 /**
@@ -14,7 +13,7 @@ open class FExceptionHttp @JvmOverloads constructor(
 
     override val formatCause: String
         get() {
-            return getCauseInfo(cause, FContext.get()).ifEmpty {
+            return getCauseInfo(cause).ifEmpty {
                 super.formatCause
             }
         }
@@ -26,10 +25,11 @@ open class FExceptionHttp @JvmOverloads constructor(
         }
 
         @JvmStatic
-        fun getCauseInfo(cause: Throwable?, context: Context?): String {
-            if (cause == null || context == null) return ""
+        fun getCauseInfo(cause: Throwable?): String {
+            if (cause == null) return ""
             val resName = "lib_result_exception_http_cause_${cause.javaClass.name}"
             return try {
+                val context = fContext
                 val resId = context.resources.getIdentifier(resName, "string", context.packageName)
                 context.getString(resId)
             } catch (e: Exception) {

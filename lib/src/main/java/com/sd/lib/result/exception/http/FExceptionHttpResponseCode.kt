@@ -1,6 +1,6 @@
 package com.sd.lib.result.exception.http
 
-import com.sd.lib.context.FContext
+import com.sd.lib.ctx.fContext
 import com.sd.lib.result.R
 
 /**
@@ -13,9 +13,8 @@ class FExceptionHttpResponseCode @JvmOverloads constructor(
 
     override val formatCause: String
         get() {
-            val context = FContext.get() ?: return super.formatCause
             return buildString {
-                append(context.getString(R.string.lib_result_exception_http_cause_response_code))
+                append(fContext.getString(R.string.lib_result_exception_http_cause_response_code))
                 append("(").append(code).append(")")
             }
         }
