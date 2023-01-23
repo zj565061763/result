@@ -84,7 +84,7 @@ class ExampleInstrumentedTest {
         assertEquals(true, result.isLoading())
         assertEquals(true, result.isFailure())
         assertEquals(false, result.isSuccess())
-        assertEquals("loading", (result as FResult.Failure).exception.toString())
+        assertEquals("loading", result.exception.toString())
 
         assertEquals(false, FResult.success("").isLoading())
         assertEquals(false, FResult.failure("").isLoading())

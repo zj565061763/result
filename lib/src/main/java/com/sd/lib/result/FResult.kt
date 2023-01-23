@@ -4,6 +4,8 @@ import com.sd.lib.result.exception.FException
 import com.sd.lib.result.exception.FExceptionLoading
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
+import kotlin.coroutines.cancellation.CancellationException
+import kotlin.reflect.KClass
 
 sealed class FResult<out R> {
 
@@ -68,10 +70,14 @@ fun <T> FResult<T>.isLoading(): Boolean {
     return this is FResult.Failure && this.exception is FExceptionLoading
 }
 
-inline fun <R> fCatching(block: () -> R): FResult<R> {
+inline fun <R> fCatching(
+    ignore: KClass<out Throwable>? = CancellationException::class,
+    block: () -> R,
+): FResult<R> {
     return try {
         FResult.success(block())
     } catch (e: Throwable) {
+        if (e::class == ignore) throw e
         FResult.failure(e)
     }
 }
