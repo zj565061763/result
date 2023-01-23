@@ -4,8 +4,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.sd.lib.result.*
 import com.sd.lib.result.exception.*
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.coroutines.cancellation.CancellationException
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -111,6 +113,18 @@ class ExampleInstrumentedTest {
         testCatchingResultFailure(
             runCatching { throw RuntimeException() }.toFResult()
         )
+
+        kotlin.run {
+            var exception: CancellationException? = null
+            try {
+                fCatching {
+                    throw CancellationException()
+                }
+            } catch (e: CancellationException) {
+                exception = e
+            }
+            assertNotNull(exception)
+        }
     }
 
     @Test
