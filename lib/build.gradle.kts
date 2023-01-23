@@ -20,9 +20,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
         kotlinOptions.freeCompilerArgs += listOf("-module-name", "$libGroupId.$libArtifactId")
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
 
     publishing {
         singleVariant("release") {
