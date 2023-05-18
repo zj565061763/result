@@ -32,8 +32,8 @@ open class FException @JvmOverloads constructor(
 
     companion object {
         @JvmStatic
-        fun wrap(cause: Throwable?): FException {
-            return if (cause is FException) cause else FException(cause = cause)
+        fun wrap(exception: Throwable?): FException {
+            return if (exception is FException) exception else FException(cause = exception)
         }
     }
 }
