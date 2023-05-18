@@ -20,8 +20,8 @@ open class FExceptionHttp @JvmOverloads constructor(
 
     companion object {
         @JvmStatic
-        fun wrap(cause: Throwable?): FExceptionHttp {
-            return if (cause is FExceptionHttp) cause else FExceptionHttp(cause = cause)
+        fun wrap(exception: Throwable?): FExceptionHttp {
+            return if (exception is FExceptionHttp) exception else FExceptionHttp(cause = exception)
         }
 
         @JvmStatic
