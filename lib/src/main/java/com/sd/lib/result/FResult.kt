@@ -38,3 +38,8 @@ inline fun <T> fCatching(
         fResultFailure(e)
     }
 }
+
+fun <R, T> Result<T>.fFailure(): Result<R> {
+    val exception = exceptionOrNull() ?: error("This method should be called when Result.isFailure")
+    return Result.failure(exception)
+}
