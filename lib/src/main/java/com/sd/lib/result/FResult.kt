@@ -23,6 +23,10 @@ fun <T> Result<T>.fIsLoading(): Boolean {
     return exceptionOrNull() is FExceptionLoading
 }
 
+fun <T> Result<T>.fIsCancellation(): Boolean {
+    return exceptionOrNull() is FExceptionCancellation
+}
+
 inline fun <T> fCatching(
     throwable: KClass<out Throwable>? = CancellationException::class,
     block: () -> T,
