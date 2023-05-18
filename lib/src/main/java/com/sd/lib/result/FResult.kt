@@ -28,9 +28,9 @@ inline fun <T> fCatching(
     block: () -> T,
 ): Result<T> {
     return try {
-        Result.success(block())
+        fResultSuccess(block())
     } catch (e: Throwable) {
         if (e::class == throwable) throw e
-        Result.failure(e)
+        fResultFailure(e)
     }
 }
