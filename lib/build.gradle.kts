@@ -6,19 +6,22 @@ plugins {
 
 val libGroupId = "com.sd.lib.android"
 val libArtifactId = "result"
-val libVersionName = "1.2.2"
+val libVersionName = "1.3.0"
 
 android {
     namespace = "com.sd.lib.result"
-    compileSdk = 33
+    compileSdk = libs.versions.androidCompileSdk.get().toInt()
     defaultConfig {
-        minSdk = 21
+        minSdk = libs.versions.androidMinSdk.get().toInt()
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-        kotlinOptions.freeCompilerArgs += listOf("-module-name", "$libGroupId.$libArtifactId")
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+        freeCompilerArgs += "-module-name=$libGroupId.$libArtifactId"
     }
 
     publishing {
@@ -29,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation("com.github.zj565061763:ctx:1.0.0")
+    implementation(libs.sd.ctx)
 }
 
 
