@@ -28,13 +28,13 @@ fun <T> Result<T>.fIsCancellation(): Boolean {
 }
 
 inline fun <T> fCatching(
-    throwable: KClass<out Throwable>? = CancellationException::class,
+    escape: KClass<out Throwable>? = CancellationException::class,
     block: () -> T,
 ): Result<T> {
     return try {
         fResultSuccess(block())
     } catch (e: Throwable) {
-        if (e::class == throwable) throw e
+        if (e::class == escape) throw e
         fResultFailure(e)
     }
 }
