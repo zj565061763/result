@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="lib_result_exception_http_cause_parse_response">数据解析异常</string>
-    <string name="lib_result_exception_http_cause_response_code">服务器异常</string>
+    <string name="lib_result_exception_http_message_parse_response">数据解析异常</string>
+    <string name="lib_result_exception_http_message_response_code">服务器异常</string>
     <string name="lib_result_exception_http_cause_java.net.SocketTimeoutException">连接超时</string>
 </resources>

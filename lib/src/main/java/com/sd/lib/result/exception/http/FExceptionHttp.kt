@@ -12,11 +12,7 @@ open class FExceptionHttp @JvmOverloads constructor(
 ) : FException(message, cause) {
 
     override val formatCause: String
-        get() {
-            return getCauseInfo(cause).ifEmpty {
-                super.formatCause
-            }
-        }
+        get() = getCauseInfo(cause).ifEmpty { super.formatCause }
 
     companion object {
         @JvmStatic
