@@ -6,7 +6,7 @@ import com.sd.lib.result.exception.FExceptionLoading
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.reflect.KClass
 
-fun <T> fResultFailure(exception: Throwable?): Result<T> = Result.failure(FException.wrap(exception))
+fun <T> fResultFailure(throwable: Throwable?): Result<T> = Result.failure(FException.wrap(throwable))
 
 fun <T> fResultFailure(message: String?): Result<T> = Result.failure(FException(message = message))
 
@@ -35,6 +35,12 @@ inline fun <T> fCatching(
         if (e::class == escape) throw e
         fResultFailure(e)
     }
+}
+
+fun <T> Result<T>.fResult(): Result<T> {
+    if (this.isSuccess) return this
+    val exception = checkNotNull(this.exceptionOrNull())
+    return fResultFailure(exception)
 }
 
 fun <R, T> Result<T>.fFailure(): Result<R> {
