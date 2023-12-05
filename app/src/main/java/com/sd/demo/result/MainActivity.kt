@@ -31,5 +31,5 @@ private fun testExceptionDesc() {
 }
 
 inline fun logMsg(block: () -> String) {
-    Log.i("FResult-demo", block())
+    Log.i("result-demo", block())
 }
