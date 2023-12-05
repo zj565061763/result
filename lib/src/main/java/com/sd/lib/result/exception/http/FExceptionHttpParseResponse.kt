@@ -15,6 +15,7 @@ class FExceptionHttpParseResponse @JvmOverloads constructor(
         get() = buildString {
             val localMsg = fContext.getString(R.string.lib_result_exception_http_message_parse_response)
             val superMsg = super.formatMessage
+
             append(localMsg)
             if (localMsg.isNotEmpty() && superMsg.isNotEmpty()) {
                 append(" ")

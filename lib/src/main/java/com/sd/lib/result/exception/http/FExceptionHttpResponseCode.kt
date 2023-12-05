@@ -11,11 +11,18 @@ class FExceptionHttpResponseCode @JvmOverloads constructor(
     message: String? = null,
 ) : FExceptionHttp(message = message) {
 
-    override val formatCause: String
-        get() {
-            return buildString {
-                append(fContext.getString(R.string.lib_result_exception_http_message_response_code))
+    override val formatMessage: String
+        get() = buildString {
+            val localMsg = fContext.getString(R.string.lib_result_exception_http_message_response_code)
+            val superMsg = super.formatMessage
+
+            if (localMsg.isNotEmpty()) {
+                append(localMsg)
                 append("(").append(code).append(")")
             }
+            if (localMsg.isNotEmpty() && superMsg.isNotEmpty()) {
+                append(" ")
+            }
+            append(superMsg)
         }
 }
