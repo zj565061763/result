@@ -6,7 +6,7 @@ plugins {
 
 val libGroupId = "com.sd.lib.android"
 val libArtifactId = "result"
-val libVersionName = "1.3.5"
+val libVersionName = "1.3.6"
 
 android {
     namespace = "com.sd.lib.result"
@@ -34,14 +34,15 @@ dependencies {
     implementation(libs.sd.ctx)
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            groupId = libGroupId
+            artifactId = libArtifactId
+            version = libVersionName
+
+            afterEvaluate {
                 from(components["release"])
-                groupId = libGroupId
-                artifactId = libArtifactId
-                version = libVersionName
             }
         }
     }
